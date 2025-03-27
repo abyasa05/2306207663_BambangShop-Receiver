@@ -85,5 +85,8 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+1. Dalam kasus ini, RwLock lebih tepat untuk digunakan dibandingkan dengan Mutex karena RwLock masih memungkinkan thread-thread untuk melakukan pembacaan notifikasi (_read_) secara bersamaan. Sementara itu, Mutex akan melakukan locking pada thread yang ingin mengakses notifikasi, baik untuk operasi _write_ maupun _read_. Maka dari itu, penggunaan RwLock bisa menghasilkan performa sistem yang lebih baik, terutama jika operasi _read_ notifikasi lebih sering dilakukan dibandingkan write.
+
+2. Dalam Rust, _static variable_ tidak bisa diubah (immutable) secara _default_ karena desain dari bahasa ini yang lebih menjamin _thread-safety_. Untuk mengubah nilai dari _static variable_, diperlukan penambahan eksplisit  seperti menggunakan RwLock atau Mutex untuk menjaga sinkronisasi dan menghindari kasus seperti race-condition.
 
 #### Reflection Subscriber-2
